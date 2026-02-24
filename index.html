@@ -1,8 +1,135 @@
-<html>
+<html lang="en">
     <head>
-
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Oldman Release - Postman-like App</title>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                display: flex;
+                flex-direction: column;
+            }
+            header {
+                background-color: #007acc;
+                color: white;
+                padding: 1rem 2rem;
+                text-align: center;
+            }
+            main {
+                flex: 1 0 auto;
+                padding: 2rem;
+                max-width: 800px;
+                margin: 0 auto;
+            }
+            .release-list {
+                list-style: none;
+                padding: 0;
+            }
+            .release-item {
+                background: white;
+                margin-bottom: 1rem;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                padding: 1rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .release-item .links {
+                display: flex;
+                gap: 0.5rem;
+            }
+            .release-item a {
+                text-decoration: none;
+                color: #007acc;
+                font-weight: bold;
+                padding: 0.3rem 0.6rem;
+                border: 1px solid #007acc;
+                border-radius: 3px;
+            }
+            .release-item a:hover {
+                background-color: #007acc;
+                color: #fff;
+            }
+            footer {
+                flex-shrink: 0;
+                text-align: center;
+                padding: 1rem;
+                background-color: #eee;
+                font-size: 0.9rem;
+            }
+        </style>
     </head>
     <body>
-        <h1>Welcome to My Website</h1>
+        <header>
+            <h1>Oldman Release</h1>
+            <p>Download the latest builds for the Oldman application.</p>
+        </header>
+        <main>
+            <h2>Releases</h2>
+            <ul class="release-list">
+                <li class="release-item">
+                    <span>v1.2.0 &ndash; Improved scripting support</span>
+                    <div class="links">
+                        <a href="#" data-version="1.2.0" data-platform="macos" class="download-link">macOS</a>
+                        <a href="#" data-version="1.2.0" data-platform="windows" class="download-link">Windows</a>
+                    </div>
+                </li>
+                <li class="release-item">
+                    <span>v1.1.5 &ndash; Bug fixes and performance updates</span>
+                    <div class="links">
+                        <a href="#" data-version="1.1.5" data-platform="macos" class="download-link">macOS</a>
+                        <a href="#" data-version="1.1.5" data-platform="windows" class="download-link">Windows</a>
+                    </div>
+                </li>
+                <li class="release-item">
+                    <span>v1.1.0 &ndash; New UI theme and workspace sync</span>
+                    <div class="links">
+                        <a href="#" data-version="1.1.0" data-platform="macos" class="download-link">macOS</a>
+                        <a href="#" data-version="1.1.0" data-platform="windows" class="download-link">Windows</a>
+                    </div>
+                </li>
+                <li class="release-item">
+                    <span>v1.0.0 &ndash; Initial public release</span>
+                    <div class="links">
+                        <a href="#" data-version="1.0.0" data-platform="macos" class="download-link">macOS</a>
+                        <a href="#" data-version="1.0.0" data-platform="windows" class="download-link">Windows</a>
+                    </div>
+                </li>
+            </ul>
+        </main>
+        <footer>
+            &copy; 2026 Oldman Labs. All rights reserved.
+        </footer>
+        <script>
+            document.querySelectorAll('.download-link').forEach(link => {
+                link.addEventListener('click', async event => {
+                    event.preventDefault();
+                    const version = link.getAttribute('data-version');
+                    const platform = link.getAttribute('data-platform');
+                    try {
+                        const url = `https://versionmanager-versionmanager-1060760766595.us-central1.run.app/version/oldman/${platform}/download`;
+                        const resp = await fetch(url, { method: 'GET' });
+                        if (!resp.ok) throw new Error('Network response was not ok');
+                        const json = await resp.json();
+                        if (json && json.url) {
+                            window.location.href = json.url;
+                        } else {
+                            alert('Download URL not available');
+                        }
+                    } catch (err) {
+                        console.error('Download failed', err);
+                        alert('Unable to initiate download for ' + platform);
+                    }
+                });
+            });
+        </script>
     </body>
 </html>
