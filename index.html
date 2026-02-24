@@ -45,6 +45,10 @@
             .release-item .links {
                 display: flex;
                 gap: 0.5rem;
+                
+            }
+            .release-item .links a{
+                margin-left: 10px;
             }
             .release-item a {
                 text-decoration: none;
@@ -76,31 +80,10 @@
             <h2>Releases</h2>
             <ul class="release-list">
                 <li class="release-item">
-                    <span>v1.2.0 &ndash; Improved scripting support</span>
+                    <span>0.9.4 &ndash; Initial public release</span>
                     <div class="links">
-                        <a href="#" data-version="1.2.0" data-platform="macos" class="download-link">macOS</a>
-                        <a href="#" data-version="1.2.0" data-platform="windows" class="download-link">Windows</a>
-                    </div>
-                </li>
-                <li class="release-item">
-                    <span>v1.1.5 &ndash; Bug fixes and performance updates</span>
-                    <div class="links">
-                        <a href="#" data-version="1.1.5" data-platform="macos" class="download-link">macOS</a>
-                        <a href="#" data-version="1.1.5" data-platform="windows" class="download-link">Windows</a>
-                    </div>
-                </li>
-                <li class="release-item">
-                    <span>v1.1.0 &ndash; New UI theme and workspace sync</span>
-                    <div class="links">
-                        <a href="#" data-version="1.1.0" data-platform="macos" class="download-link">macOS</a>
-                        <a href="#" data-version="1.1.0" data-platform="windows" class="download-link">Windows</a>
-                    </div>
-                </li>
-                <li class="release-item">
-                    <span>v1.0.0 &ndash; Initial public release</span>
-                    <div class="links">
-                        <a href="#" data-version="1.0.0" data-platform="macos" class="download-link">macOS</a>
-                        <a href="#" data-version="1.0.0" data-platform="windows" class="download-link">Windows</a>
+                        <a href="#" data-version="0.9.4" data-platform="macos" class="download-link">macOS</a>
+                        <!-- <a href="#" data-version="0.9.4" data-platform="windows" class="download-link">Windows</a> -->
                     </div>
                 </li>
             </ul>
@@ -115,7 +98,7 @@
                     const version = link.getAttribute('data-version');
                     const platform = link.getAttribute('data-platform');
                     try {
-                        const url = `https://versionmanager-versionmanager-1060760766595.us-central1.run.app/version/oldman/${platform}/download`;
+                        const url = `https://versionmanager-versionmanager-1060760766595.us-central1.run.app/version/oldman/${platform}/${version}/download`;
                         const resp = await fetch(url, { method: 'GET' });
                         if (!resp.ok) throw new Error('Network response was not ok');
                         const json = await resp.json();
